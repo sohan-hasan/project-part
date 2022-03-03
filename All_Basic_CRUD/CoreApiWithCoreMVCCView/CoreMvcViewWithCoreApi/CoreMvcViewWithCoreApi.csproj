@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\0183714f-b846-443a-ae0d-21e678cf7dcb_download.jpg" />
+    <None Include="wwwroot\images\32e6a869-fe45-4189-84fe-5ca9a97ddbaf_download.jpg" />
+    <None Include="wwwroot\images\40fc8759-ded2-43c4-87f7-5b589087828e_download %282%29.jpg" />
+    <None Include="wwwroot\images\5b636c9e-4dd6-4a38-9d53-0b651f3674f6_download %281%29.jpg" />
+    <None Include="wwwroot\images\9a7ea242-719f-4491-b058-54463c3cf511_download.jpg" />
+    <None Include="wwwroot\images\ae734217-0f7c-4a7d-a9ee-502eda77530d_download.jpg" />
+    <None Include="wwwroot\images\e3956f3c-e483-4179-98d7-e08cacb5e24a_download %282%29.jpg" />
+    <None Include="wwwroot\images\no-image.png" />
+    <None Include="wwwroot\js\main.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

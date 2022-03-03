@@ -1,0 +1,16 @@
+﻿@model DepartmentViewModel
+<form enctype="multipart/form-data" asp-action="Edit" method="post" id="form">
+    <div class="col-md-12 mx-auto">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="DepartmentId" />
+        <div class="form-group mb-3">
+            <label asp-for="DepartmentName" class="form-label"></label>
+            <input asp-for="DepartmentName" class="form-control" />
+            <span asp-validation-for="DepartmentName" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Save" class="btn btn-info" />
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn-warning" />
+        </div>
+    </div>
+</form>

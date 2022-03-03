@@ -1,0 +1,40 @@
+﻿
+<div class="col-md-12 mx-auto">
+    <form enctype="multipart/form-data">
+        <div class="form-group mb-3">
+            <label class="form-label">Name</label>
+            <input ng-model="newEmployee.Name" name="Name" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Department Name</label>
+            <select ng-model="newEmployee.DepartmentId" class="form-control">
+                <option value="">Select...</option>
+                <option ng-repeat="item in departments" value="{{item.DepartmentId}}">
+                    {{item.DepartmentName}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" ng-model="newEmployee.Email" name="Email" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Date Of Birth</label>
+            <input type="date" ng-model="newEmployee.DateOfBirth" name="DateOfBirth" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" ng-model="newEmployee.Age" name="Age" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label mb-3">Building Photo</label>
+            <img src="~/images/no-image.png" style="height:90px!important; width:auto!important;" class="form-control change_edit mb-3" asp-append-version="true" />
+            <input class="form-control change_image" type="file" ngf-select="UploadFiles($files)" required />
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Save" class="btn btn-info" data-bs-dismiss="modal" ng-click="Insert()" />
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn-warning" />
+        </div>
+    </form>
+</div>
+

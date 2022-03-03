@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DepartmentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/custom/js/module.js"></script>
+<script src="~/custom/js/service.js"></script>
+<script src="~/custom/js/controller.js"></script>
+<h1>Department</h1>
+<br />
+<div ng-app="departmentModule" ng-controller="departmentController">
+    <input type="hidden" ng-model="newDepartment.DepartmentId" />
+    <div class="input-group mb-3">
+        <input ng-model="newDepartment.DepartmentName" class="form-control w-25" />
+        <span class="input-group-btn">
+            <button class="btn btn-info"  style="width:150px" ng-click="Insert()">{{btnName}}</button>
+        </span>
+    </div>
+    <table class="table table-bordered table-striped" id="roleTable">
+        <thead>
+            <tr>
+                <td>SL#</td>
+                <th>Department</th>
+                <th class="text-center tbl_action">DO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in departments">
+                <td>
+                    {{$index+1}}
+                </td>
+                <td>
+                    {{item.DepartmentName}}
+                </td>
+                <td class="text-center" style="width:150px">
+                    <div class="btn-group">
+                        <div class="dropdown">
+                            <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" ng-click='SelectedDepartmentForEdit(item)'>Edit</a></li>
+                                <li><a class="dropdown-item" ng-click='DeleteDepartment(item.DepartmentId)' onclick="return confirm('Are you sure to delete?')">Delete</a></li>
+                                <li><a class="dropdown-item" ng-click='SelectedDepartment(item)' data-bs-toggle="modal" data-bs-target="#DetailsModal">Details</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header px-md-5 bg-info">
+                    <h3 class="modal-title" id="detailsModalLabel">Update Department</h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-md-5">
+                    <partial name="~/Views/Department/_Edit.cshtml" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header px-md-5 bg-info">
+                    <h3 class="modal-title" id="detailsModalLabel">Department Details</h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-md-5">
+                    <partial name="~/Views/Department/_Details.cshtml" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<DepartmentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Department</h1>
+<br />
+<form method="post" asp-action="create" asp-controller="Department">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="input-group">
+        <input name="DepartmentName" class="form-control w-25" />
+        <span class="input-group-btn" style="width:150px">
+            <button class="btn btn-info">Add Department</button>
+        </span>
+    </div>
+</form>
+<table class="table table-bordered table-striped" id="roleTable">
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th class="text-center tbl_action">DO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.DepartmentName
+                </td>
+                <td class="text-center" style="width:150px">
+                    <div class="btn-group">
+                        <div class="dropdown">
+                            <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" onclick='Update(@item.DepartmentId)' data-bs-toggle="modal" data-bs-target="#EditModal">Edit</a></li>
+                                <li><a class="dropdown-item" asp-controller="Department" asp-action="Delete" asp-route-id="@item.DepartmentId" onclick="return confirm('Are you sure to delete?')">Delete</a></li>
+                                <li><a class="dropdown-item" onclick='Details(@item.DepartmentId)' data-bs-toggle="modal" data-bs-target="#DetailsModal">Details</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header px-md-5 bg-info">
+                <h3 class="modal-title" id="detailsModalLabel">Update Department</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-md-5">
+                <div id="EditDiv">
+                    @if (ViewBag.Details == "Show")
+                    {
+                        <partial name="~/Views/Department/_Edit.cshtml" />
+                        ViewBag.Details = "";
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header px-md-5 bg-info">
+                <h3 class="modal-title" id="detailsModalLabel">Department Details</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-md-5">
+                <div id="DetailsDiv">
+                    @if (ViewBag.Details == "Show")
+                    {
+                        <partial name="~/Views/Department/_Details.cshtml" />
+                        ViewBag.Details = "";
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Update(id) {
+        $.ajax({
+            url: "/Department/Edit?id=" + id,
+            type: "GET",
+            data: "",
+            contentType: 'application/json; charset = utf-8',
+            success: function (data) {
+                $('#EditDiv').show();
+                $('#EditDiv').html(data);
+            },
+            error: function () {
+                alert("Error occured")
+            }
+        })
+    }
+    function Details(id) {
+        $.ajax({
+            url: "/Department/Details?id=" + id,
+            type: "GET",
+            data: "",
+            contentType: 'application/json; charset = utf-8',
+            success: function (data) {
+                $('#DetailsDiv').show();
+                $('#DetailsDiv').html(data);
+            },
+            error: function () {
+                alert("Error occured")
+            }
+        })
+    }
+</script>

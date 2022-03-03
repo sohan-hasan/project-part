@@ -1,0 +1,48 @@
+﻿@model EmployeeViewModel
+@{
+    var imagePath = "~/images/" + (Model.ImageName ?? "no-image.png");
+}
+<form enctype="multipart/form-data" asp-action="Edit" method="post" id="form">
+    <div class="col-md-12 mx-auto">
+        <input type="hidden" asp-for="EmployeeId" />
+        <input type="hidden" asp-for="ImageName" />
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" disabled />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="DepartmentName" class="form-label"></label>
+            @if (ViewBag.Departments != null)
+            {
+                <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(@ViewBag.Departments,"DepartmentId", "DepartmentName"))" disabled>
+                    <option value="">--Select Department--</option>
+                </select>
+            }
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" disabled />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group position-relative mb-3">
+            <label asp-for="DateOfBirth" class="form-label"></label>
+            <input asp-for="DateOfBirth" class="form-control datetimepicker" disabled />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Age" class="form-label"></label>
+            <input asp-for="Age" class="form-control" disabled />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Photo" class="form-label mb-3"></label>
+            <img src="@imagePath" style="height: 90px !important; width: auto !important;" class="change_edit form-control mb-3" asp-append-version="true" />
+        </div>
+        <div class="form-group mb-3">
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn-warning" />
+        </div>
+    </div>
+</form>
+

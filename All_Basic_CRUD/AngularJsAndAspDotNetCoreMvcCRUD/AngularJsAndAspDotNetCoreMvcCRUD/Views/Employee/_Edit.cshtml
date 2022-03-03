@@ -1,0 +1,40 @@
+﻿<div class="col-md-12 mx-auto">
+    <form enctype="multipart/form-data">
+        <input type="hidden" ng-model="clickedEmployee.EmployeeId" />
+        <input type="hidden" ng-model="clickedEmployee.ImageName" />
+        <div class="form-group mb-3">
+            <label class="form-label">Name</label>
+            <input ng-model="clickedEmployee.Name" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Department Name</label>
+            <select ng-model="clickedEmployee.DepartmentId" class="form-control" ng-options="value.DepartmentId as value.DepartmentName for (key, value) in departments">
+                <option ng-repeat="item in departments" value="{{item.DepartmentId}}" ng-selected="clickedEmployee.DepartmentId == item.DepartmentId">
+                    {{item.DepartmentName}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Email Address</label>
+            <input ng-model="clickedEmployee.Email" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Date Of Birth</label>
+            <input ng-model="clickedEmployee.DateOfBirth" class="form-control" type="date"/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" ng-model="clickedEmployee.Age" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label mb-3">Employee Photo</label>
+            <img ng-src="/images/{{clickedEmployee.ImageName}}" style="height:90px!important; width:auto!important;" class="form-control change_edit mb-3" asp-append-version="true" />
+            <input class="form-control change_image" type="file" ngf-select="UploadFiles($files)" />
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Update" class="btn btn-info" data-bs-dismiss="modal" ng-click="UpdateEmployee()" />
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn-warning" />
+        </div>
+    </form>
+</div>
+<script src="~/js/main.js"></script>
